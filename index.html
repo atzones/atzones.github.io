@@ -1,10 +1,189 @@
-<html><head><title>Byetnet</tile>
-      <script type="text/javascript">
-    window.location.replace("https://www.byetnet.com");
+<html lang="en">
+	<head>
+<style>
+textarea
+{
+   font-size:17px !important;
+}
+.btn1
+{
+ margin-bottom:3px;
+ background-color:#337ab7;
+ width:50px;
+ color:white;
+ font-size:17px;
+}
+.btn2
+{
+ margin-top:3px;
+ margin-left:8px;
+ background-color:#337ab7;
+ width:auto;
+ color:white;
+ font-size:17px;
+}
+</style>
+
+	<!--	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> -->
+		<meta charset="utf-8" />
+		<title>User   &nbsp;</title>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script> 
+    <script type="text/javascript">
+ 
+      // Load the Google Transliterate API
+      google.load("elements", "1", {
+            packages: "transliteration"
+          });
+ 
+      function onLoad() {
+        var options = {
+            sourceLanguage:
+                google.elements.transliteration.LanguageCode.ENGLISH,
+            destinationLanguage:
+                [google.elements.transliteration.LanguageCode.HINDI],
+            shortcutKey: 'ctrl+g',
+            transliterationEnabled: true
+        };
+ 
+        // Create an instance on TransliterationControl with the required
+        // options.
+        var control =
+            new google.elements.transliteration.TransliterationControl(options);
+ 
+        // Enable transliteration in the textbox with id
+        // 'transliterateTextarea'.
+        control.makeTransliteratable(['data']);
+      }
+      google.setOnLoadCallback(onLoad);
+   	
+
+	</script> 
+		<script type="text/javascript">
+      function printTextArea() {
+        childWindow = window.open('','childWindow','location=yes, menubar=yes, toolbar=yes');
+        childWindow.document.open();
+        childWindow.document.write('<html><head></head><body>');
+        childWindow.document.write(document.getElementById('data').value.replace(/\n/gi,'<br>'));
+        childWindow.document.write('</body></html>');
+        childWindow.print();
+        childWindow.document.close();
+        childWindow.close();
+      }
+	  
+</script>		
+</head>
+<body class="no-skin">
+				<div id="container">
+				 <br>		
+<table style="border:0; border-collapse: collapse;">
+ <form id="etoh" action="index2.php" target="_blank" method="post">					
+		<tr align='center'><td colspan="3"><b style='font-size:19px;'>Insert Characters</b>
+		<button type="button" class='btn1' id="purnviram" OnClick="myFunction1()" title="पूर्ण विराम">&#2404;</button>
+		<button type="button"  class='btn1' id="deerghviram" OnClick="myFunction2()" title="दीर्घ विराम">&#2405;</button>
+		<button type="button" class='btn1' id="laghav" OnClick="myFunction3()" title="लाघव चिन्ह">&#2416;</button>
+		<button type="button" class='btn1' id="om" OnClick="myFunction5()" title="ॐ">&#2384;</button></td></tr>
+														
+	     <tr><td colspan="5" width='600px' height="30px" style="background-color:#337ab7;text-align:center;color: #FFFFFF; font-weight:Bold;" autofocus > इंग्लिश में टाइप करे स्पेस दबाये यह हिन्दी में परिवर्तित हो जाएगा </td></tr>
+        <tr><td colspan="5">
+				 
+	    <textarea style="width:100%;max-width:700px;height:200px; border:solid 5px #337ab7;" id="data" class="js-copytextarea" name="data" placeholder="Start Type Here................" autofocus></textarea>
+		
+		</td>
+	    </tr>	
+ </form>		
+	 <tr>							 
+    	<td colspan="5"><button onclick="saveTextAsFile()" id='tds' class="fa fa-download btn2"><span>&nbsp;Save Text to File</span></button>
+		
+			<button onclick="saveDocAsFile()" class="fa fa-download btn2"><span>&nbsp;Save as Doc File</span></button>
+	
+			<button class="js-textareacopybtn btn2" ><i class="glyphicon glyphicon-duplicate"><span>Copy</span><br></i></button>
+			
+			<button class='btn2' type="button" name="Print" onclick="printTextArea()" value="Print"><i class=" glyphicon glyphicon-print"><span>Print</span></i></button></td>
+	     </tr>
+</table>
+ </div>
+<script type="text/javascript">
+//document.getElementById("data").style.fontWeight = "bold";
+function myFunction1() {
+    etoh.data.value+='।';
+	document.getElementById("data").focus();
+}
+function myFunction2() {
+    etoh.data.value+='॥';
+	document.getElementById("data").focus();
+}
+function myFunction3() {
+    etoh.data.value+='॰';
+	document.getElementById("data").focus();
+}
+function myFunction5() {
+    etoh.data.value+=' ॐ ';
+	document.getElementById("data").focus();
+}
+ 
+function saveTextAsFile()
+{
+    var textToSave = document.getElementById("data").value;
+    var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+    //var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+	var fileNameToSaveAs = "indiatyping.txt";
+ 
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+ 
+    downloadLink.click();
+}
+
+// for save as doc file
+
+function saveDocAsFile()
+{
+    var textToSave = document.getElementById("data").value;
+    var textToSaveAsBlob = new Blob([textToSave], {type:"text/Doc"});
+    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+    //var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+     var fileNameToSaveAs = "indiatyping.doc";
+	 
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+ 
+    downloadLink.click();
+}
+
+ 
+function destroyClickedElement(event)
+{
+    document.body.removeChild(event.target);
+}
+
+// for copy text 
+   var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+copyTextareaBtn.addEventListener('click', function(event) {
+  var copyTextarea = document.querySelector('.js-copytextarea');
+  copyTextarea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Copying text command was ' + msg);
+  } catch (err) {
+    console.log('Oops, unable to copy');
+  }
+});
 </script>
-      </head>
-   
-   <body>
-      <p>Thanks For Visiting. Now you will automatically redirect to byetnet.com homepage.</p>  
-   </body>
+</body>
 </html>
+
